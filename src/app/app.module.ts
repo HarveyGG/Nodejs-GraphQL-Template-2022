@@ -8,6 +8,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ConfigModule } from '@nestjs/config';
+import { Request } from 'express';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { ConfigModule } from '@nestjs/config';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      cors: (req, callback) => {
+      cors: (req: Request, callback) => {
         // const origin = req.header('Origin');
         // TODO cors logic
 
