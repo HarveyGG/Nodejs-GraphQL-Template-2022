@@ -6,19 +6,19 @@ export class CreatePersonInput {
   @Field(() => String)
   name: string;
 
-  @Field(() => String)
-  hobbies: MongooseSchema.Types.ObjectId[];
+  @Field(() => String, { nullable: true })
+  hobbies?: MongooseSchema.Types.ObjectId[];
 }
 
 @InputType()
 export class ListPersonInput {
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   _id?: MongooseSchema.Types.ObjectId;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   name?: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   hobbies?: MongooseSchema.Types.ObjectId[];
 }
 
@@ -27,9 +27,9 @@ export class UpdatePersonInput {
   @Field(() => String)
   _id: MongooseSchema.Types.ObjectId;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   name?: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   hobbies?: MongooseSchema.Types.ObjectId[];
 }

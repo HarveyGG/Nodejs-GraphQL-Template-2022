@@ -19,6 +19,10 @@ export class HobbyService {
     return createHobby.save();
   }
 
+  getById(_id: MongooseSchema.Types.ObjectId) {
+    return this.hobbyModel.findById(_id).exec();
+  }
+
   list(filters: ListHobbyInput) {
     return this.hobbyModel.find({ ...filters }).exec();
   }

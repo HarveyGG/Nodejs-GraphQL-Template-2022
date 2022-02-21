@@ -7,18 +7,18 @@ import { HobbyModule } from './hobby/hobby.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://root:root@cluster0.8dcmd.mongodb.net/zomi',
-    ),
+    ConfigModule.forRoot(),
+    MongooseModule.forRoot(process.env.MONGO_URI),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
-      playground: true,
-      debug: false,
+      playground: JSON.parse(process.env.GRAPHQL_PLAYGROUND),
+      debug: JSON.parse(process.env.GRAPHQL_DEBUG),
     }),
     PersonModule,
     HobbyModule,
