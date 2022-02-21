@@ -16,6 +16,12 @@ import { ConfigModule } from '@nestjs/config';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      cors: (req, callback) => {
+        // const origin = req.header('Origin');
+        // TODO cors logic
+
+        callback(null, { origin: true });
+      },
       sortSchema: true,
       playground: JSON.parse(process.env.GRAPHQL_PLAYGROUND),
       debug: JSON.parse(process.env.GRAPHQL_DEBUG),
